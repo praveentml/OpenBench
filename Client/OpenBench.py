@@ -32,7 +32,7 @@ IS_WINDOWS = platform.system() == 'Windows'
 OS_NAME = platform.system() + ' ' + platform.release()
 
 ENGINE_SETTINGS = {
-    'PIRARUCU': {'run': 'java -jar {0}lib/pirarucu.jar'},
+    'PRCHESS': {'run': 'java -jar {0}lib/PrChess.jar'},
 }
 
 
@@ -125,9 +125,11 @@ def getEngine(data):
 
     if IS_WINDOWS:
         script = 'python3 {0}'.format(script)
-    else:
+    if not IS_WINDOWS:
         os.system('chmod +x {0}/{1}'.format(directory, script))
-
+    
+    script = 'python3 {0}'.format(script)
+    
     print('Building')
     # Build Engine using provided gcc and PGO flags
     process = subprocess.call(
